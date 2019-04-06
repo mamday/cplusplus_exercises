@@ -227,8 +227,7 @@ std::tuple<double, int, double, double> fizz_rnd_list::get_stats(double X){
 
 
 // Get the length of the array and the number of times to iterate from the 
-// command line (num). Then initialize either int_rnd_list (if the second 
-// argument is thousand) or fizz_rnd_list(if the second argument is one).
+// command line (num). Then initialize fizz_rnd_list.
 // The get_stats() function that is shared by both classes will get a tuple
 // that contains 1)The closest value close_val, to X (which is randomly generated in the 
 // loop and is called 'rand_num') 2)The index of close_val 3)The mean of all
@@ -247,15 +246,13 @@ int main(int argc, char* argv[]){
     float num = atof(argv[1]);
     //Change the input char array into a string that is easier to parse
     std::string in_string(argv[2]);
-    //Execute the get_stats() function for int_rnd_list if in_string is 'thousand'
-    // and for fizz_rnd_list if the input is 'one'. Otherwise complain.
     std::tuple<double,int,double,double> fin_tup;
     double rand_num;
     if(in_string=="thousand"){
-      int_rnd_list i_rnd(num);
+      fizz_rnd_list f_rnd(num);
       for(int i=0; i<(num+1); ++i){
         rand_num = rand() % 1000;
-        fin_tup = i_rnd.get_stats(rand_num);
+        fin_tup = f_rnd.get_stats(rand_num);
       }
     }
     else if(in_string=="one"){

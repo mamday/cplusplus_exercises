@@ -20,7 +20,7 @@ class fizz_rnd_list{
     //Constructors that take the number N of random numbers as its argument
     //Where N is either an integer or a float depending on what range of random
     //numbers you want (float: 0-1, integer: 0-1000) 
-    virtual fizz_rnd_list(int N);
+    fizz_rnd_list(int N);
     fizz_rnd_list(float N);
     //Destructor
     virtual ~fizz_rnd_list();

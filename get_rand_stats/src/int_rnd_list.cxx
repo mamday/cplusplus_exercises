@@ -1,4 +1,4 @@
-#include "get_rand_stats.h"
+#include "int_rnd_list.h"
 
 //Initialize int_rnd_list, using the constructor from fizz_rnd_list that takes
 // an integer. By using the overloaded constructor, I avoid making an 
