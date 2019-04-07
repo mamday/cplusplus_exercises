@@ -69,20 +69,78 @@ void test_rnd_list::test_get_mean_one(){
   double mean = test_list.get_mean(2);
   assert(mean==((test_rand[0]+test_rand[1])/2));
 }
+//Test that if I create a list with two entries that the standard deviation is
+//the square root of the difference of those two entries from their mean divided//by two
+void test_rnd_list::test_get_std_dev_one(){
+  int_rnd_list test_list(2);
+  double* test_rand = test_list.get_list();
+  double mean = test_list.get_mean(2);
+  double std_dev = test_list.get_std_dev(2);
+  assert(std_dev==sqrt((((test_rand[0]-mean)*(test_rand[0]-mean))/2)+(((test_rand[1]-mean)*(test_rand[1]-mean))/2))
+);
+}
 
-int main(int argc, char* argv[]){
-  test_rnd_list tester;
-  tester.test_fizz_rnd_list_initiation();
-  tester.test_int_rnd_list_initiation();
-  tester.test_uniform_std_dev();
-  tester.test_get_mean_zero();
-  tester.test_get_std_dev_zero();
-  tester.test_get_mean_one();
-  tester.test_get_std_dev_one();
-  tester.test_get_mean_two();
-  tester.test_get_mean_repeat();
-  tester.test_get_mean_threepeat();
-  tester.test_get_stats();
-  tester.test_get_stats_ends();
-  std::cout<<"Passed!"<<std::endl;
+//Test that if I create a list with three entries that the mean is a third of
+// the sum of those three entries
+void test_rnd_list::test_get_mean_two(){
+  int_rnd_list test_list(3);
+  double* test_rand = test_list.get_list();
+  double mean = test_list.get_mean(3);
+  assert(mean==((test_rand[0]+test_rand[1]+test_rand[2])/3));
+}
+
+//Test that if I calculate the mean up to index 1, and then calculate the mean
+//up to index two, that the result is the same as if I calculate the mean just
+//once up to index two
+void test_rnd_list::test_get_mean_repeat(){
+  int_rnd_list test_list(2);
+  double* test_rand = test_list.get_list();
+  double mean = test_list.get_mean(1);
+  double mean1 = test_list.get_mean(2);
+  assert(mean1==((test_rand[0]+test_rand[1])/2));
+}
+
+//Test that if I calculate the mean up to index 1, and then calculate the mean
+//up to index two, and then calculate the mean up to index 3 that the result is
+//the same as if I calculate the mean just once up to index three
+void test_rnd_list::test_get_mean_threepeat(){
+  int_rnd_list test_list(3);
+  double* test_rand = test_list.get_list();
+  double mean = test_list.get_mean(1);
+  double mean1 = test_list.get_mean(2);
+  double mean2 = test_list.get_mean(3);
+  assert(mean2==((test_rand[0]+test_rand[1]+test_rand[2])/3));
+}
+//Test that the get_stats algorithm gets the highest value in the list if I give//a number greater than 1 and the lowest number if I give a number lower than 0
+void test_rnd_list::test_get_stats_ends(){
+  float in_len = 3;
+  fizz_rnd_list test_list(in_len);
+  double* test_rand = test_list.get_list();
+
+  std::tuple<double, int, double, double> stats = test_list.get_stats(2);
+  assert(std::get<1>(stats)==2 && std::get<0>(stats)==test_rand[2]);
+
+  std::tuple<double, int, double, double> stats1 = test_list.get_stats(-1);
+  assert(std::get<1>(stats1)==0 && std::get<0>(stats1)==test_rand[0]);
+}
+void test_rnd_list::test_get_stats(){
+  float in_len = 100000;
+  int_rnd_list test_list(in_len);
+  int test_val = 500;
+  double* test_rand = test_list.get_list();
+  std::tuple<double, int, double, double> stats = test_list.get_stats(test_val);
+
+  int cor_ind =0;
+  double cor_val=0;
+  double diff=1001;
+  for(int i=0; i<in_len; ++i){
+    double cur_diff=std::abs(test_val-test_rand[i]);
+    if(cur_diff<diff){
+      cor_ind=i;
+      cor_val=test_rand[i];
+      diff=cur_diff;
+    }
+  }
+  assert(std::get<1>(stats)==cor_ind && std::get<0>(stats)==cor_val);
+
 }
