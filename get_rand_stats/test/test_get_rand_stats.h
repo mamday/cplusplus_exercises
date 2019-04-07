@@ -1,4 +1,4 @@
-#include "int_rnd_list.h"
+#include "get_rand_stats.h"
 
 class test_rnd_list{
   public:

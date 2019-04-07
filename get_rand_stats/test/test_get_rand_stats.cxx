@@ -71,31 +71,18 @@ void test_rnd_list::test_get_mean_one(){
 }
 
 int main(int argc, char* argv[]){
-  //If one input is given, and the name of the input is 'test', then run the 
-  //tests
-  if(argc == 2){
-    std::string in_string(argv[1]);
-    if(in_string!="test"){
-      std::cerr<<"ERROR: Received the incorrect number of arguments"<<std::endl;
-      exit(EXIT_FAILURE);
-    }
-    test_rnd_list tester;
-    tester.test_fizz_rnd_list_initiation();
-    tester.test_int_rnd_list_initiation();
-    tester.test_uniform_std_dev();
-    tester.test_get_mean_zero();
-    tester.test_get_std_dev_zero();
-    tester.test_get_mean_one();
-    tester.test_get_std_dev_one();
-    tester.test_get_mean_two();
-    tester.test_get_mean_repeat();
-    tester.test_get_mean_threepeat();
-    tester.test_get_stats();
-    tester.test_get_stats_ends();
-    std::cout<<"Passed!"<<std::endl;
-  }
-  else{
-    std::cerr<<"ERROR: Received the incorrect number of arguments"<<std::endl;
-    exit(EXIT_FAILURE);
-  }
+  test_rnd_list tester;
+  tester.test_fizz_rnd_list_initiation();
+  tester.test_int_rnd_list_initiation();
+  tester.test_uniform_std_dev();
+  tester.test_get_mean_zero();
+  tester.test_get_std_dev_zero();
+  tester.test_get_mean_one();
+  tester.test_get_std_dev_one();
+  tester.test_get_mean_two();
+  tester.test_get_mean_repeat();
+  tester.test_get_mean_threepeat();
+  tester.test_get_stats();
+  tester.test_get_stats_ends();
+  std::cout<<"Passed!"<<std::endl;
 }
